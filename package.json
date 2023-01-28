@@ -1,0 +1,22 @@
+{
+  "name": "backend-rfid-damri",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./app.js",
+    "start": "node ./app.js"
+  },
+  "author": "alif-arrizqy",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.9.0",
+    "mongoose-paginate-v2": "^1.7.1",
+    "nodemon": "^2.0.20"
+  }
+}

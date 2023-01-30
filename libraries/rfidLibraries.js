@@ -27,7 +27,8 @@ const isCardExistInTempCard = async (id_card) => {
 
 const isCardExistInUser = async (id_card) => {
     const isExist = await user.findOne({ cardId: id_card })
-    if (isExist == null) { return true }
+    // console.log(isExist);
+    if (isExist == null || isExist == true) { return true }
     else { return false }
 }
 

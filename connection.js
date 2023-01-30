@@ -1,6 +1,9 @@
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 
+// handling warning
+mongoose.set('strictQuery', false)
+
 const env = dotenv.config().parsed
 
 const connection = async () => {

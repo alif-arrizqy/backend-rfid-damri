@@ -22,7 +22,7 @@ const SchemaTravel = mongoose.Schema({
     }
 })
 
-const SchemaTempDepartue = mongoose.Schema({
+const SchemaTempDeparture = mongoose.Schema({
     cardId: {
         type: String,
     },
@@ -36,6 +36,6 @@ const SchemaTempDepartue = mongoose.Schema({
 })
 
 const TravelModel = mongoose.model('TravelHistory', SchemaTravel)
-const TempDepartureModel = mongoose.model('TempDeparture', SchemaTempDepartue)
+const TempDepartureModel = mongoose.model('TempDeparture', SchemaTempDeparture)
 
 export { TravelModel, TempDepartureModel }

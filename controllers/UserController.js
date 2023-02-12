@@ -6,15 +6,15 @@ import { isCardExistInUser, isCardExistInTempCard, deleteCardId } from '../libra
 
 const getAllUser = async (req, res) => {
     try {
-        // let find = {
-        //     fullname: {$regex: `^${req.query.search}`, $options: 'i'}
-        // }
+        let find = {
+            fullname: {$regex: `^${req.query.search}`, $options: 'i'}
+        }
         let options = {
             page: req.query.page || 1,
             limit: req.query.limit || 10,
         }
-        // const users = await user.paginate(find, options)
-        const users = await user.paginate(options)
+        const users = await user.paginate(find, options)
+        // const users = await user.paginate(options)
 
         if (!users) {
             throw {

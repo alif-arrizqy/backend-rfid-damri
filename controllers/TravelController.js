@@ -109,4 +109,56 @@ const travelDestination = async (req, res) => {
     }
 }
 
-export { travelDeparture, travelDestination }
+const getAllTravelHistory = async (req, res) => {
+    try {
+        let find = {
+            cardId: {$regex: `^${req.query.search}`, $options: 'i'}
+        }
+        let options = {
+            page: req.query.page || 1,
+            limit: req.query.limit || 10,
+        }
+
+        const travelHistory = await TravelModel.paginate(find, options)
+        if (!travelHistory) { throw { code: 404, message: 'NOT_FOUND' } }
+        
+        return res.status(200).json({
+            status: true,
+            message: 'GET_ALL_TRAVEL_HISTORY_SUCCESS',
+            total: travelHistory.total,
+            travelHistory
+        })
+    } catch (err) {
+        if (!err.code) { err.code = 500 }
+        return res.status(err.code).json({
+            status: false,
+            message: err.message
+        })
+    }
+}
+
+const getTravelHistoryByCardId = async (req, res) => {
+    try {
+        const cardId = req.params.cardId
+
+        if(!cardId) { throw { code: 428, message: 'Card ID is required' } }
+
+        const travelHistory = await TravelModel.findOne({cardId: cardId})
+        if (!travelHistory) { throw { code: 404, message: 'NOT_FOUND' } }
+
+        return res.status(200).json({
+            status: true,
+            message: 'GET_TRAVEL_HISTORY_BY_CARD_ID_SUCCESS',
+            travelHistory
+        })
+    } catch (err) {
+        if (!err.code) { err.code = 500 }
+        return res.status(err.code).json({
+            status: false,
+            message: err.message
+        })
+    }
+}
+
+
+export { travelDeparture, travelDestination, getAllTravelHistory, getTravelHistoryByCardId }

@@ -1,6 +1,6 @@
-import { TravelModel, TempDepartureModel } from '../models/Travel.js'
+import { TravelModel, TempTravelModel } from '../models/Travel.js'
 import { isCardExistInUser } from '../libraries/rfidLibraries.js'
-import { isUserDepartureExist, isUserTempDepartureExist } from '../libraries/travelLibraries.js'
+import { isUserDepartureExist, isUserTempTravelExist } from '../libraries/travelLibraries.js'
 
 const travelDeparture = async (req, res) => {
     try {
@@ -11,31 +11,23 @@ const travelDeparture = async (req, res) => {
         if (!departure) { throw { code: 428, message: 'Departure is required' } }
 
         // check if user is already exist in departure
-        const isExistDeparture = await isUserTempDepartureExist(cardId)
-        if (!isExistDeparture) { throw { code: 409, message: 'USER_ALREADY_IN_DEPARTURE' }}
+        const isExistDeparture = await isUserTempTravelExist(cardId)
+        if (!isExistDeparture) { throw { code: 409, message: 'USER_ALREADY_IN_TEMP_TRAVEL' }}
         
         // check if card is exist in user
         const cardIsExistByUser = await isCardExistInUser(cardId)
         if (cardIsExistByUser) { throw { code: 409, message: 'ID_CARD_IS_EXIST_IN_USER' }}
-
-        const newDeparture = new TravelModel({
+        
+        const tempTravel = new TempTravelModel({
             cardId: cardId,
             departure: departure,
             timeIn: Math.floor(Date.now() / 1000)
         })
         
-        const tempDeparture = new TempDepartureModel({
-            cardId: cardId,
-            departure: departure,
-            timeIn: Math.floor(Date.now() / 1000)
-        })
-
-        // save to travel history
-        const Departure = await newDeparture.save()
         // save to temp departure
-        const tempDepart = await tempDeparture.save()
+        const tempDepart = await tempTravel.save()
 
-        if (!Departure && !tempDepart) {
+        if (!tempDepart) {
             throw {
                 code: 500,
                 message: 'INSERT_DEPARTURE_FAILED'
@@ -45,7 +37,7 @@ const travelDeparture = async (req, res) => {
         return res.status(200).json({
             status: true,
             message: 'INSERT_DEPARTURE_SUCCESS',
-            Departure
+            tempDepart
         })
     } catch (err) {
         if (!err.code) { err.code = 500 }
@@ -71,23 +63,34 @@ const travelDestination = async (req, res) => {
 
         // check if card is exist in user
         const cardIsExistByUser = await isCardExistInUser(cardId)
-        if (cardIsExistByUser) { throw { code: 409, message: 'ID_CARD_IS_EXIST_IN_USER' }}
+        if (cardIsExistByUser) { throw { code: 409, message: 'ID_CARD_NOT_EXIST_IN_USER' }}
 
         let fields = {}
         fields.destination = destination
         fields.timeOut = Math.floor(Date.now() / 1000)
 
         // update data travel history by cardId
-        const Destination = await TravelModel.findByIdAndUpdate(
+        const Destination = await TempTravelModel.findByIdAndUpdate(
             getDepartureId,
             fields,
             { new: true}
         )
 
-        // delete data temp departure by cardId
-        await TempDepartureModel.findOneAndDelete({cardId: cardId})
+        // insert to travel history
+        const getTravelData = await TempTravelModel.findById(getDepartureId)
+        const copyTravel = new TravelModel({
+            cardId: getTravelData.cardId,
+            departure: getTravelData.departure,
+            destination: getTravelData.destination,
+            timeIn: getTravelData.timeIn,
+            timeOut: getTravelData.timeOut
+        })
+        const Travel = await copyTravel.save()
 
-        if (!Destination) {
+        // delete data temp departure by cardId
+        await TempTravelModel.findOneAndDelete({cardId: cardId})
+
+        if (!Travel) {
             throw {
                 code: 500,
                 message: 'INSERT_DESTINATION_FAILED'
@@ -97,7 +100,7 @@ const travelDestination = async (req, res) => {
         return res.status(200).json({
             status: true,
             message: 'INSERT_DESTINATION_SUCCESS',
-            Destination
+            Travel
         })
     
     } catch (err) {
@@ -166,7 +169,7 @@ const getTravelRealtime = async (req, res) => {
 
         if(!cardId) { throw { code: 428, message: 'Card ID is required' } }
 
-        const travelRealtime = await TempDepartureModel.findOne({cardId: cardId})
+        const travelRealtime = await TempTravelModel.findOne({cardId: cardId})
         if (!travelRealtime) { throw { code: 404, message: 'NOT_FOUND' } }
 
         return res.status(200).json({

@@ -1,17 +1,15 @@
-import { TravelModel, TempDepartureModel } from '../models/Travel.js'
+import { TravelModel, TempTravelModel } from '../models/Travel.js'
 
-const isUserTempDepartureExist = async (cardId) => {
-    const isExist = await TempDepartureModel.findOne({ cardId: cardId })
-    // console.log(isExist);
+const isUserTempTravelExist = async (cardId) => {
+    const isExist = await TempTravelModel.findOne({ cardId: cardId })
     if (isExist == null) { return true }
     else { return false }
 }
 
 const isUserDepartureExist = async (cardId) => {
-    const isExist = await TravelModel.findOne({ cardId: cardId })
-    // console.log(isExist);
+    const isExist = await TempTravelModel.findOne({ cardId: cardId })
     if (isExist != null ) { return true, isExist }
     else { return false }
 }
 
-export { isUserDepartureExist, isUserTempDepartureExist }
+export { isUserDepartureExist, isUserTempTravelExist }

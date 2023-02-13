@@ -160,5 +160,28 @@ const getTravelHistoryByCardId = async (req, res) => {
     }
 }
 
+const getTravelRealtime = async (req, res) => {
+    try {
+        const cardId = req.params.cardId
 
-export { travelDeparture, travelDestination, getAllTravelHistory, getTravelHistoryByCardId }
+        if(!cardId) { throw { code: 428, message: 'Card ID is required' } }
+
+        const travelRealtime = await TempDepartureModel.findOne({cardId: cardId})
+        if (!travelRealtime) { throw { code: 404, message: 'NOT_FOUND' } }
+
+        return res.status(200).json({
+            status: true,
+            message: 'GET_TRAVEL_REALTIME_BY_CARD_ID_SUCCESS',
+            travelRealtime
+        })
+    } catch (err) {
+        if (!err.code) { err.code = 500 }
+        return res.status(err.code).json({
+            status: false,
+            message: err.message
+        })
+    }
+}
+
+
+export { travelDeparture, travelDestination, getAllTravelHistory, getTravelHistoryByCardId, getTravelRealtime }

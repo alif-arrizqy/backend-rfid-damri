@@ -146,7 +146,7 @@ const getTravelHistoryByCardId = async (req, res) => {
 
         if(!cardId) { throw { code: 428, message: 'Card ID is required' } }
 
-        const travelHistory = await TravelModel.findOne({cardId: cardId})
+        const travelHistory = await TravelModel.find({cardId: cardId})
         if (!travelHistory) { throw { code: 404, message: 'NOT_FOUND' } }
 
         return res.status(200).json({

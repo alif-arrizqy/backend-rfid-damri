@@ -10,6 +10,10 @@
   },
   "author": "alif-arrizqy",
   "license": "ISC",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",

@@ -6,7 +6,7 @@ const getCard = async (req, res) => {
     try {
         // check if card is already exist
         const isExist = await card.find()
-        if (!isExist) { throw { code: 409, message: 'ID card is already exist' } }
+        if (isExist.length === 0) { throw { code: 404, message: 'CARD_NOT_FOUND' }}
         const cardId = isExist.map((card) => card.cardId)
 
         return res.status(200).json({

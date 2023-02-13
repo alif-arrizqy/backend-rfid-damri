@@ -9,7 +9,7 @@ const isCardExist = async (id_card) => {
     if (isExist == null || isExist == undefined) { 
         return true
     }
-    else { return false }
+    else { return false, isExist }
 }
 
 const countRegion = async (region) => {

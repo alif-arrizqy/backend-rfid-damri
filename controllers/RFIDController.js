@@ -1,7 +1,27 @@
 import card from '../models/Card.js'
 import regionModel from '../models/Region.js'
-import { isCardExist, countRegion } from '../libraries/rfidLibraries.js'
+import { isCardExist, countRegion, isCardExistInTempCard } from '../libraries/rfidLibraries.js'
 
+const getCard = async (req, res) => {
+    try {
+        // check if card is already exist
+        const isExist = await card.find()
+        if (!isExist) { throw { code: 409, message: 'ID card is already exist' } }
+        const cardId = isExist.map((card) => card.cardId)
+
+        return res.status(200).json({
+            status: true,
+            message: 'CARD_IS_EXIST',
+            cardId: cardId[0]
+        })
+    } catch (err) {
+        if(!err.code) { err.code = 500 }
+        return res.status(err.code).json({
+            status: false,
+            message: err.message
+        })
+    }
+}
 
 const addCard = async (req, res) => {
     try {
@@ -95,4 +115,4 @@ const counterRegion = async (req, res) => {
     }
 }
 
-export { addCard, counterRegion }
+export { getCard, addCard, counterRegion }

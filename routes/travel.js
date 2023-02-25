@@ -9,7 +9,7 @@ router.get('/travel-history', [jwtAuth(), roleAuth(['user'])], getAllTravelHisto
 router.get('/travel-history/:cardId', [jwtAuth(), roleAuth(['user'])], getTravelHistoryByCardId)
 router.get('/travel-realtime/:cardId', [jwtAuth(), roleAuth(['user'])], getTravelRealtime)
 
-router.post('/departure', [jwtAuth(), roleAuth(['user'])], travelDeparture)
-router.post('/destination', [jwtAuth(), roleAuth(['user'])], travelDestination)
+router.post('/departure', travelDeparture)
+router.post('/destination', travelDestination)
 
 export default router

@@ -5,7 +5,7 @@ import roleAuth from '../middlewares/roleAuth.js'
 
 var router = express.Router()
 
-router.get('/travel-history', [jwtAuth(), roleAuth(['user'])], getAllTravelHistory)
+router.get('/travel-history', [jwtAuth(), roleAuth(['admin'])], getAllTravelHistory)
 router.get('/travel-history/:cardId', [jwtAuth(), roleAuth(['user'])], getTravelHistoryByCardId)
 router.get('/travel-realtime/:cardId', [jwtAuth(), roleAuth(['user'])], getTravelRealtime)
 

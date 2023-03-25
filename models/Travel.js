@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
 
 const SchemaTravel = mongoose.Schema({
     cardId: {
@@ -43,6 +44,8 @@ const SchemaTempTravel = mongoose.Schema({
         required: false
     }
 })
+
+SchemaTravel.plugin(mongoosePaginate)
 
 const TravelModel = mongoose.model('TravelHistory', SchemaTravel)
 const TempTravelModel = mongoose.model('TempTravel', SchemaTempTravel)

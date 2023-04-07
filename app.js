@@ -15,6 +15,11 @@ app.use(cors({
 }));
 
 app.use('/', indexRouter);
+app.use('/test', (req, res) => {
+    res.json({
+        message: 'Hello World'
+    })
+})
 
 // connect to mongodb
 connection()

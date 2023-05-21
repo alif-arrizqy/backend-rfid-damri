@@ -1,6 +1,8 @@
 import { TravelModel, TempTravelModel } from '../models/Travel.js'
 import { isCardExistInUser } from '../libraries/rfidLibraries.js'
 import { isUserDepartureExist, isUserTempTravelExist } from '../libraries/travelLibraries.js'
+import user from '../models/User.js';
+
 
 const travelDeparture = async (req, res) => {
     try {
@@ -124,6 +126,15 @@ const getAllTravelHistory = async (req, res) => {
 
         const travelHistory = await TravelModel.paginate(find, options)
         if (!travelHistory) { throw { code: 404, message: 'NOT_FOUND' } }
+
+        // find cardId in user
+        const cardIdUser = travelHistory.docs[0].cardId
+        const User = await user.find({cardId: cardIdUser})
+        if (!User) { throw { code: 404, message: 'USER_NOT_FOUND' } }
+
+        // insert into object response
+        let fullname = User[0].fullname
+        travelHistory.docs[0] = { ...travelHistory.docs[0]._doc, fullname: fullname }
         
         return res.status(200).json({
             status: true,
@@ -148,11 +159,25 @@ const getTravelHistoryByCardId = async (req, res) => {
 
         const travelHistory = await TravelModel.find({cardId: cardId})
         if (!travelHistory) { throw { code: 404, message: 'NOT_FOUND' } }
+        
+        // find cardId in user
+        const User = await user.find({cardId: cardId})
+        if (!User) { throw { code: 404, message: 'USER_NOT_FOUND' } }
 
+        // insert into object response
+        let fullname = User[0].fullname
+        const newTravelHistory = {
+            cardId: travelHistory[0].cardId,
+            fullname: fullname,
+            departure: travelHistory[0].departure,
+            destination: travelHistory[0].destination,
+            timeIn: travelHistory[0].timeIn,
+            timeOut: travelHistory[0].timeOut
+        }
         return res.status(200).json({
             status: true,
             message: 'GET_TRAVEL_HISTORY_BY_CARD_ID_SUCCESS',
-            travelHistory
+            newTravelHistory
         })
     } catch (err) {
         if (!err.code) { err.code = 500 }
@@ -172,10 +197,23 @@ const getTravelRealtime = async (req, res) => {
         const travelRealtime = await TempTravelModel.findOne({cardId: cardId})
         if (!travelRealtime) { throw { code: 404, message: 'NOT_FOUND' } }
 
+        // find cardId in user
+        const User = await user.find({cardId: cardId})
+        if (!User) { throw { code: 404, message: 'USER_NOT_FOUND' } }
+        
+        let fullname = User[0].fullname
+
+        const newTravelRealtime = {
+            cardId: cardId,
+            fullname: User[0].fullname,
+            departure: travelRealtime.departure,
+            timeIn: travelRealtime.timeIn
+        }
+
         return res.status(200).json({
             status: true,
             message: 'GET_TRAVEL_REALTIME_BY_CARD_ID_SUCCESS',
-            travelRealtime
+            newTravelRealtime
         })
     } catch (err) {
         if (!err.code) { err.code = 500 }

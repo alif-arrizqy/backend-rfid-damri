@@ -11,7 +11,7 @@ var app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-    origin: env.CORS_ORIGIN,
+    origin: ["http://localhost:3000", "http://localhost:3001"]
 }));
 
 app.use('/', indexRouter);

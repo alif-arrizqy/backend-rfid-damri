@@ -166,14 +166,17 @@ const getTravelHistoryByCardId = async (req, res) => {
 
         // insert into object response
         let fullname = User[0].fullname
-        const newTravelHistory = {
-            cardId: travelHistory[0].cardId,
-            fullname: fullname,
-            departure: travelHistory[0].departure,
-            destination: travelHistory[0].destination,
-            timeIn: travelHistory[0].timeIn,
-            timeOut: travelHistory[0].timeOut
-        }
+        
+        const newTravelHistory = travelHistory.map((item) => {
+            return {
+                cardId: item.cardId,
+                fullname: fullname,
+                departure: item.departure,
+                destination: item.destination,
+                timeIn: item.timeIn,
+                timeOut: item.timeOut
+            }
+        })
         return res.status(200).json({
             status: true,
             message: 'GET_TRAVEL_HISTORY_BY_CARD_ID_SUCCESS',

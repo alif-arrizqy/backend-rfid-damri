@@ -1,0 +1,762 @@
+{
+	"info": {
+		"_postman_id": "73a48c93-e434-476c-b6b7-063a89e2534a",
+		"name": "RFID Damri",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11529019"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "page",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/users?page=1&limit=10&search=alif",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "search",
+									"value": "alif"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "cardId",
+									"value": "346622",
+									"type": "text"
+								},
+								{
+									"key": "fullname",
+									"value": "eki ilkom",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "eki123@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "eki123",
+									"type": "text"
+								},
+								{
+									"key": "retype_password",
+									"value": "eki123",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "089234526262",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/users",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "fullname",
+									"value": "Gozali yasser",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "gozali123@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "gozali123",
+									"type": "text"
+								},
+								{
+									"key": "retype_password",
+									"value": "gozali123",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "08912377282",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/users/641537d2372e3cf42c1c5abe",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"users",
+								"641537d2372e3cf42c1c5abe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/users/63de6f4365db04e68a18968e",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"users",
+								"63de6f4365db04e68a18968e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/users/63d55dce9e60040bfd48bd86",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"users",
+								"63d55dce9e60040bfd48bd86"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Card",
+			"item": [
+				{
+					"name": "Add Card",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "cardId",
+									"value": "346622",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/card",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"card"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Card",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "cardId",
+									"value": "12911717745",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/card",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"card"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Counter Wilayah",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"region\": \"jakarta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/card/region",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"card",
+								"region"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "gozali123@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "gozali123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/auth/login",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "dianadiana123@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/auth/check-email",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"auth",
+								"check-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refreshToken",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGU2ZjQzNjVkYjA0ZTY4YTE4OTY4ZSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjc1NTIyODU0LCJleHAiOjE2NzU2MDkyNTR9.tYBU_mhWayg-yHMM8uGIp1moLTT1tAeXJ0VImXlT1Iw",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/auth/refresh-token",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Travel",
+			"item": [
+				{
+					"name": "Departure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "cardId",
+									"value": "12911717738",
+									"type": "text"
+								},
+								{
+									"key": "departure",
+									"value": "bogor",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/travel/departure",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"travel",
+								"departure"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Departure",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "cardId",
+											"value": "346624",
+											"type": "text"
+										},
+										{
+											"key": "departure",
+											"value": "bogor",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{localhost}}/travel/departure",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"travel",
+										"departure"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "166"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a6-pi8LzA9jwFv7ao262eEqSbpwWjg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Feb 2023 15:28:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"INSERT_DEPARTURE_SUCCESS\",\n    \"tempDepart\": {\n        \"cardId\": \"346624\",\n        \"departure\": \"bogor\",\n        \"timeIn\": 1677166099,\n        \"_id\": \"63f78613614de2803ac62946\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Destination",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "cardId",
+									"value": "12911717738",
+									"type": "text"
+								},
+								{
+									"key": "departure",
+									"value": "bogor",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "destination",
+									"value": "jakarta",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/travel/destination",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"travel",
+								"destination"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Destination",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "cardId",
+											"value": "346624",
+											"type": "text"
+										},
+										{
+											"key": "departure",
+											"value": "bogor",
+											"type": "text"
+										},
+										{
+											"key": "destination",
+											"value": "jakarta",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{localhost}}/travel/destination",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"travel",
+										"destination"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "209"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d1-yIKm7uQdODdRy3zKm57pHKfjMMc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Feb 2023 15:28:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"INSERT_DESTINATION_SUCCESS\",\n    \"Travel\": {\n        \"cardId\": \"346624\",\n        \"departure\": \"bogor\",\n        \"destination\": \"jakarta\",\n        \"timeIn\": 1677166099,\n        \"timeOut\": 1677166137,\n        \"_id\": \"63f78639614de2803ac6294d\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Travel History",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "cardId",
+									"value": "346621",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/travel/travel-history?page=1&limit=10&search=12911717738",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"travel",
+								"travel-history"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "search",
+									"value": "12911717738"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Travel History By CardId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/travel/travel-history/12911717738",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"travel",
+								"travel-history",
+								"12911717738"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Travel Realtime",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/travel/travel-realtime/12911717738",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"travel",
+								"travel-realtime",
+								"12911717738"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NzVmODQ5MDM4ZTZlMDJhY2Y0Nzg0MiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjg1NDUyOTE3LCJleHAiOjE2ODU0NTQ3MTd9.nyCvs6hrXmCnMczy9qk1Tiip1YYB5zN0BCf_PezxqUs",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}
